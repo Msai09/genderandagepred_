@@ -1,89 +1,26 @@
-# Insightful Oracle : Gender Age Prediction
+Gender and Age Detection with Deep Learning
+Objective:
+To build a gender and age detector that can approximately guess the gender and age of a person (face) in a picture or through a webcam.
 
-This project is designed to estimate the gender and age of individuals from facial images using a deep learning model. The model is trained on the UTKFace dataset, which is a large-scale face dataset with age, gender, and ethnicity annotations. The dataset consists of over 20,000 face images covering a wide range of ages, genders, and facial variations.
+About the Project:
+This Python project utilizes Deep Learning to accurately identify the gender and age of a person from a single image of a face. It predicts gender as 'Male' or 'Female' and age in predefined ranges due to the complexity of estimating exact age from a single image.
 
-## Table of Contents
+Dataset:
+The project utilizes the Adience dataset, available in the public domain here. The dataset consists of 26,580 photos of 2,284 subjects across various real-world imaging conditions like noise, lighting, pose, and appearance.
 
-1. [Project Description](#project-description)
-2. [Dataset](#dataset)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Model Architecture](#model-architecture)
-6. [Contributing](#contributing)
-7. [License](#license)
-8. [Acknowledgments](#acknowledgments)
-9. [Documentation](#documentation)
-
-## Project Description
-
-This project aims to predict the gender and age of individuals from facial images using a pre-trained deep learning model. The project is divided into two parts: the backend, which includes the code for training and building the model, and the frontend, which includes the code for using the model to predict gender and age from new images.
-
-## Dataset
-
-The model is trained on the UTKFace dataset, which is a large-scale face dataset with long age span (ranging from 0 to 116 years old). The dataset contains over 20,000 face images with annotations of age, gender, and ethnicity. The images cover a wide variation in pose, facial expression, illumination, occlusion, resolution, etc.
-
-For more details about the dataset, you can visit the following link: [UTKFace Dataset](https://susanqq.github.io/UTKFace/)
-
-## Installation
-
-To run this project, you need to download the UTKFace dataset from Kaggle using the following command:
-```
-kaggle datasets download -d jangedoo/utkface-new
-```
-
-## Usage
-
-To use the pre-trained model for gender and age estimation, you can follow the steps below:
-
-1. Load the pre-trained model using `load_model('Gender_Age_model.h5')`.
-2. Preprocess the input image to the required input size of the model (160x160).
-3. Use the model to predict the gender and age of the individual in the image.
-
-Here's an example of how to use the model to predict gender and age from a single image:
-```python
-import cv2
-import numpy as np
-from tensorflow.keras.models import load_model
-
-# Load the pre-trained model
-model = load_model('Gender_Age_model.h5')
-# Define the gender labels
-gender_dict = {0: 'Male', 1: 'Female'}
-
-# Load the image using OpenCV
-img = cv2.imread('path/to/your/image.jpg', cv2.IMREAD_GRAYSCALE)
-
-# Resize the image to the required input size of the model (160x160)
-img = cv2.resize(img, (160, 160))
-
-# Reshape the image for model input
-img = img.reshape(1, 160, 160, 1)
-
-# Predict using the model
-pred = model.predict(img)
-pred_gender = gender_dict[round(pred[0][0][0])]
-pred_age = round(pred[1][0][0])
-print("Predicted Gender:", pred_gender, "Predicted Age:", pred_age)
-```
-
-## Model Architecture
-
-The model architecture consists of multiple convolutional and fully connected layers. It takes an input image of size 160x160 and outputs two separate outputs: one for gender prediction and one for age prediction.
-
-The model is trained using binary cross-entropy loss for gender prediction and mean absolute error (MAE) loss for age prediction.
-
-## Contributing
-
-Contributions to this project are welcome. If you have any suggestions, bug fixes, or improvements, please feel free to open a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Acknowledgments
-
-Special thanks to the creators of the UTKFace dataset for providing such a valuable resource for research and development.
-
-## Documentation
-
-For more details on how to use the code and the functionalities of the backend and frontend, please refer to the code comments and documentation within the code files. If you have any questions or need further assistance, you can contact the project creator, Harsh Gupta (Desparete Enuf).
+Additional Python Libraries Required:
+OpenCV: pip install opencv-python
+argparse: pip install argparse
+Project Contents:
+opencv_face_detector.pbtxt
+opencv_face_detector_uint8.pb
+age_deploy.prototxt
+age_net.caffemodel
+gender_deploy.prototxt
+gender_net.caffemodel
+Sample images for testing
+detect.py
+Usage:
+Download the repository.
+Navigate to the project directory in Command Prompt or Terminal.
+To detect gender and age in an image:
